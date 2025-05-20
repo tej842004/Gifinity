@@ -3,7 +3,7 @@ import SearchInput from "./SearchInput";
 import ToggleButton from "./ToggleButton";
 
 interface Props {
-  onSearch: (searchString: string) => void;
+  onSearch: (searchText: string) => void;
 }
 
 const NavBar = ({ onSearch }: Props) => {

@@ -2,10 +2,11 @@ import { Button, Stack, Text } from "@chakra-ui/react";
 import { tags } from "../data/tags";
 
 interface Props {
-  onSelectTag: (selectTag: string) => void;
+  onSelectTag: (tag: string) => void;
+  selectedTag: string;
 }
 
-const Tags = ({ onSelectTag }: Props) => {
+const Tags = ({ onSelectTag, selectedTag }: Props) => {
   return (
     <Stack
       direction="row"
@@ -15,7 +16,7 @@ const Tags = ({ onSelectTag }: Props) => {
     >
       {tags.map((tag) => (
         <Button
-          variant="outline"
+          variant={tag.name === selectedTag ? "solid" : "outline"}
           key={tag.id}
           onClick={() => onSelectTag(tag.name)}
         >

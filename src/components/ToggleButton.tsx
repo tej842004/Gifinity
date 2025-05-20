@@ -12,7 +12,7 @@ const ToggleButton = () => {
       variant="ghost"
       borderRadius="full"
       onClick={toggleColorMode}
-      size="md"
+      size="lg"
     />
   );
 };

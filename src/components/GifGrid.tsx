@@ -1,14 +1,14 @@
 import { Box, Image, Spinner, Text } from "@chakra-ui/react";
 import Masonry from "react-masonry-css";
+import type { GifQuery } from "../App";
 import useGif from "../hooks/useGif";
 
 interface Props {
-  searchString?: string;
-  tagString?: string;
+  gifQuery: GifQuery;
 }
 
-const GifGrid = ({ searchString, tagString }: Props) => {
-  const { gifs, isLoading, error } = useGif(searchString, tagString);
+const GifGrid = ({ gifQuery }: Props) => {
+  const { gifs, isLoading, error } = useGif(gifQuery);
 
   const breakpointColumnsObj = { default: 4, 1100: 3, 768: 2, 0: 1 };
 

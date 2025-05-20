@@ -1,17 +1,25 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { useRef } from "react";
 import { CiSearch } from "react-icons/ci";
 
 interface Props {
-  onSearch: (searchString: string) => void;
+  onSearch: (searchText: string) => void;
 }
 
 const SearchInput = ({ onSearch }: Props) => {
+  const ref = useRef<HTMLInputElement>(null);
+
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (ref.current && ref.current.value) onSearch(ref.current?.value);
+      }}
+    >
       <InputGroup>
         <InputLeftElement children={<CiSearch />} />
         <Input
-          onChange={(event) => onSearch(event.target.value)}
+          ref={ref}
           placeholder="Search..."
           borderRadius={20}
           variant="filled"

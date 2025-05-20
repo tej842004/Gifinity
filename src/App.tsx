@@ -4,9 +4,13 @@ import GifGrid from "./components/GifGrid";
 import NavBar from "./components/NavBar";
 import Tags from "./components/Tags";
 
+export interface GifQuery {
+  search: string;
+  tag: string;
+}
+
 const App = () => {
-  const [search, setSearch] = useState("");
-  const [tag, setTag] = useState("");
+  const [gifQuery, setGifQuery] = useState<GifQuery>({} as GifQuery);
 
   return (
     <Grid
@@ -16,15 +20,18 @@ const App = () => {
       }}
     >
       <GridItem area="nav">
-        <NavBar onSearch={(searchString) => setSearch(searchString)} />
+        <NavBar onSearch={(search) => setGifQuery({ ...gifQuery, search })} />
       </GridItem>
       <Show above="lg">
         <GridItem as="aside">
-          <Tags onSelectTag={(selectTag) => setTag(selectTag)} />
+          <Tags
+            onSelectTag={(tag) => setGifQuery({ ...gifQuery, tag })}
+            selectedTag={gifQuery.tag}
+          />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <GifGrid searchString={search} tagString={tag} />
+        <GifGrid gifQuery={gifQuery} />
       </GridItem>
     </Grid>
   );

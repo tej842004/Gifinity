@@ -1,3 +1,4 @@
+import type { GifQuery } from "../App";
 import useData from "./useData";
 
 interface Properties {
@@ -14,9 +15,17 @@ export interface Gif {
   images: Properties;
 }
 
-const useGif = (searchString?: string, tagString?: string) => {
-  const endpoint = searchString || tagString ? "/search" : "/trending";
-  return useData<Gif>(endpoint, searchString, tagString);
+const useGif = (gifQuery: GifQuery) => {
+  const endpoint = gifQuery.search || gifQuery.tag ? "/search" : "/trending";
+  return useData<Gif>(
+    endpoint,
+    {
+      params: {
+        q: gifQuery.search || gifQuery.tag,
+      },
+    },
+    [gifQuery]
+  );
 };
 
 export default useGif;
