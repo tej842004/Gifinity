@@ -6,7 +6,7 @@ interface FetchResponse<T> {
   data: T[];
 }
 
-const useData = <T>(endpoint: string) => {
+const useData = <T>(endpoint: string, searchString?: string) => {
   const [gifs, setGifs] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -18,6 +18,9 @@ const useData = <T>(endpoint: string) => {
     apiClient
       .get<FetchResponse<T>>(endpoint, {
         signal: controller.signal,
+        params: {
+          q: searchString,
+        },
       })
       .then((res) => {
         setGifs(res.data.data);
@@ -30,7 +33,7 @@ const useData = <T>(endpoint: string) => {
       });
 
     return () => controller.abort();
-  }, [endpoint]);
+  }, [endpoint, searchString]);
 
   return { gifs, error, isLoading };
 };

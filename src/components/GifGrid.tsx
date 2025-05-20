@@ -1,20 +1,40 @@
-import { Box, Image, Spinner } from "@chakra-ui/react";
+import { Box, Image, Spinner, Text } from "@chakra-ui/react";
 import Masonry from "react-masonry-css";
 import useGif from "../hooks/useGif";
 
-const GifGrid = () => {
-  const { gifs, isLoading, error } = useGif();
+interface Props {
+  searchString?: string;
+}
 
-  const breakpointColumnsObj = {
-    default: 4, // xl and above
-    1100: 3, // lg screens
-    768: 2, // md screens
-    0: 1, // base (mobile)
-  };
+const GifGrid = ({ searchString }: Props) => {
+  const { gifs, isLoading, error } = useGif(searchString);
 
-  if (isLoading) return <Spinner />;
+  const breakpointColumnsObj = { default: 4, 1100: 3, 768: 2, 0: 1 };
 
-  if (error) return null;
+  if (isLoading)
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="50vh"
+      >
+        <Spinner />
+      </Box>
+    );
+
+  if (error)
+    return (
+      <Text
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="20vh"
+        color="tomato"
+      >
+        {error}
+      </Text>
+    );
 
   return (
     <Box px={4}>

@@ -1,12 +1,11 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { useState } from "react";
 import GifGrid from "./components/GifGrid";
 import NavBar from "./components/NavBar";
 import Tags from "./components/Tags";
-import { useState } from "react";
 
 const App = () => {
-  const [search, setSearch] = useState<string | null>(null);
-  console.log(search);
+  const [search, setSearch] = useState("");
 
   return (
     <Grid
@@ -24,7 +23,7 @@ const App = () => {
         </GridItem>
       </Show>
       <GridItem area="main">
-        <GifGrid />
+        <GifGrid searchString={search} />
       </GridItem>
     </Grid>
   );

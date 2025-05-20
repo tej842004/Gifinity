@@ -8,12 +8,15 @@ interface Properties {
   };
 }
 
-interface Gif {
+export interface Gif {
   id: string;
   title: string;
   images: Properties;
 }
 
-const useGif = () => useData<Gif>("/trending");
+const useGif = (searchString?: string) => {
+  const endpoint = searchString ? "/search" : "/trending";
+  return useData<Gif>(endpoint, searchString);
+};
 
 export default useGif;
