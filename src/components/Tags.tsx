@@ -1,5 +1,5 @@
 import { Button, Stack, Text } from "@chakra-ui/react";
-import { popularTags } from "../data/populatTags";
+import { tags } from "../data/tags";
 
 const Tags = () => {
   return (
@@ -9,7 +9,7 @@ const Tags = () => {
       alignItems="center"
       justifyContent="center"
     >
-      {popularTags.map((tag) => (
+      {tags.map((tag) => (
         <Button variant="solid" key={tag.id}>
           <Text fontSize="md">{tag.name}</Text>
         </Button>

@@ -1,4 +1,4 @@
-export const popularTags = [
+export const tags = [
   { id: 1, name: "Funny" },
   { id: 2, name: "Cats" },
   { id: 3, name: "Dogs" },

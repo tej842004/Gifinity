@@ -1,35 +1,9 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
+import { Box, Image, Spinner } from "@chakra-ui/react";
 import Masonry from "react-masonry-css";
-import { Box, Image } from "@chakra-ui/react";
-
-interface Properties {
-  fixed_width: {
-    url: string;
-    height: string;
-    width: string;
-  };
-}
-
-interface TrendingGif {
-  id: string;
-  title: string;
-  images: Properties;
-}
-
-interface FetchResponse {
-  data: TrendingGif[];
-}
+import useGif from "../hooks/useGif";
 
 const GifGrid = () => {
-  const [trendingGifs, setTrendingGifs] = useState<TrendingGif[]>([]);
-
-  useEffect(() => {
-    apiClient
-      .get<FetchResponse>("/trending")
-      .then((res) => setTrendingGifs(res.data.data))
-      .catch((err) => console.log(err));
-  }, []);
+  const { gifs, isLoading, error } = useGif();
 
   const breakpointColumnsObj = {
     default: 4, // xl and above
@@ -38,6 +12,10 @@ const GifGrid = () => {
     0: 1, // base (mobile)
   };
 
+  if (isLoading) return <Spinner />;
+
+  if (error) return null;
+
   return (
     <Box px={4}>
       <Masonry
@@ -45,7 +23,7 @@ const GifGrid = () => {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {trendingGifs.map((gif) => (
+        {gifs.map((gif) => (
           <Box key={gif.id} mb={4} borderRadius="md" overflow="hidden">
             <Image
               src={gif.images.fixed_width.url}
