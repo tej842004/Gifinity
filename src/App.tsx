@@ -6,6 +6,7 @@ import Tags from "./components/Tags";
 
 const App = () => {
   const [search, setSearch] = useState("");
+  const [tag, setTag] = useState("");
 
   return (
     <Grid
@@ -19,11 +20,11 @@ const App = () => {
       </GridItem>
       <Show above="lg">
         <GridItem as="aside">
-          <Tags />
+          <Tags onSelectTag={(selectTag) => setTag(selectTag)} />
         </GridItem>
       </Show>
       <GridItem area="main">
-        <GifGrid searchString={search} />
+        <GifGrid searchString={search} tagString={tag} />
       </GridItem>
     </Grid>
   );

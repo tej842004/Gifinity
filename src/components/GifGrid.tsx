@@ -4,10 +4,11 @@ import useGif from "../hooks/useGif";
 
 interface Props {
   searchString?: string;
+  tagString?: string;
 }
 
-const GifGrid = ({ searchString }: Props) => {
-  const { gifs, isLoading, error } = useGif(searchString);
+const GifGrid = ({ searchString, tagString }: Props) => {
+  const { gifs, isLoading, error } = useGif(searchString, tagString);
 
   const breakpointColumnsObj = { default: 4, 1100: 3, 768: 2, 0: 1 };
 
@@ -37,7 +38,7 @@ const GifGrid = ({ searchString }: Props) => {
     );
 
   return (
-    <Box px={4}>
+    <Box px={4} py={2}>
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"

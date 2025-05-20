@@ -14,9 +14,9 @@ export interface Gif {
   images: Properties;
 }
 
-const useGif = (searchString?: string) => {
-  const endpoint = searchString ? "/search" : "/trending";
-  return useData<Gif>(endpoint, searchString);
+const useGif = (searchString?: string, tagString?: string) => {
+  const endpoint = searchString || tagString ? "/search" : "/trending";
+  return useData<Gif>(endpoint, searchString, tagString);
 };
 
 export default useGif;

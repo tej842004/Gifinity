@@ -6,7 +6,11 @@ interface FetchResponse<T> {
   data: T[];
 }
 
-const useData = <T>(endpoint: string, searchString?: string) => {
+const useData = <T>(
+  endpoint: string,
+  searchString?: string,
+  tagString?: string
+) => {
   const [gifs, setGifs] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -19,7 +23,7 @@ const useData = <T>(endpoint: string, searchString?: string) => {
       .get<FetchResponse<T>>(endpoint, {
         signal: controller.signal,
         params: {
-          q: searchString,
+          q: searchString || tagString,
         },
       })
       .then((res) => {
@@ -33,7 +37,7 @@ const useData = <T>(endpoint: string, searchString?: string) => {
       });
 
     return () => controller.abort();
-  }, [endpoint, searchString]);
+  }, [endpoint, searchString, tagString]);
 
   return { gifs, error, isLoading };
 };
