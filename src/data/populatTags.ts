@@ -1,0 +1,16 @@
+export const popularTags = [
+  { id: 1, name: "Funny" },
+  { id: 2, name: "Cats" },
+  { id: 3, name: "Dogs" },
+  { id: 4, name: "Memes" },
+  { id: 5, name: "Reactions" },
+  { id: 6, name: "Movies" },
+  { id: 7, name: "TV Shows" },
+  { id: 8, name: "Sports" },
+  { id: 9, name: "Dance" },
+  { id: 10, name: "Music" },
+  { id: 11, name: "Love" },
+  { id: 12, name: "Happy" },
+  { id: 13, name: "Sad" },
+  { id: 14, name: "Excited" },
+];
