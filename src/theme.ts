@@ -3,7 +3,7 @@ import {
   type ThemeConfig,
   type ThemeOverride,
 } from "@chakra-ui/react";
-import "@fontsource/pacifico";
+import "@fontsource/dancing-script/700.css";
 
 const config: ThemeConfig = {
   initialColorMode: "dark",
@@ -11,7 +11,7 @@ const config: ThemeConfig = {
 };
 
 const fonts = {
-  heading: `'Pacifico', cursive`,
+  heading: '"Dancing Script", cursive',
   body: `'Inter', sans-serif`,
 };
 

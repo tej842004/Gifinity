@@ -1,15 +1,15 @@
 import { Box, Heading, Image, Spinner, Text } from "@chakra-ui/react";
+import { IoIosTrendingUp } from "react-icons/io";
 import Masonry from "react-masonry-css";
 import type { GifQuery } from "../App";
 import useGif from "../hooks/useGif";
-import { IoIosTrendingUp } from "react-icons/io";
 
 interface Props {
   gifQuery: GifQuery;
 }
 
 const GifGrid = ({ gifQuery }: Props) => {
-  const { gifs, isLoading, error } = useGif(gifQuery);
+  const { data: gifs, isLoading, error } = useGif(gifQuery);
 
   const breakpointColumnsObj = { default: 7, 1100: 3, 768: 2, 0: 1 };
 
@@ -52,6 +52,7 @@ const GifGrid = ({ gifQuery }: Props) => {
         <IoIosTrendingUp />
         Trending Now
       </Heading>
+
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"

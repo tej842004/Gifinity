@@ -9,7 +9,7 @@ interface Props {
 const NavBar = ({ onSearch }: Props) => {
   return (
     <HStack padding="10px" gap={5}>
-      <Heading size="md">Gifinity</Heading>
+      <Heading size="lg">Gifinity</Heading>
       <SearchInput onSearch={onSearch} />
       <ToggleButton />
     </HStack>

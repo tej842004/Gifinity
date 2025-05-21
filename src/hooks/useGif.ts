@@ -16,7 +16,8 @@ export interface Gif {
 }
 
 const useGif = (gifQuery: GifQuery) => {
-  const endpoint = gifQuery.search || gifQuery.tag ? "/search" : "/trending";
+  const endpoint =
+    gifQuery.search || gifQuery.tag ? "/gifs/search" : "/gifs/trending";
   return useData<Gif>(
     endpoint,
     {

@@ -3,6 +3,7 @@ import { useState } from "react";
 import GifGrid from "./components/GifGrid";
 import NavBar from "./components/NavBar";
 import Tags from "./components/Tags";
+import useSearches from "./hooks/useSearches";
 
 export interface GifQuery {
   search: string;
