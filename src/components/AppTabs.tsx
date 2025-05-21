@@ -1,20 +1,22 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Tab, TabList, Tabs } from "@chakra-ui/react";
 
-const AppTabs = () => {
+interface Props {
+  selectedTab: number;
+  onTabChange: (index: number) => void;
+}
+
+const AppTabs = ({ selectedTab, onTabChange }: Props) => {
   return (
-    <Tabs variant="unstyled">
+    <Tabs
+      index={selectedTab}
+      onChange={onTabChange}
+      variant="soft-rounded"
+      size={{ base: "md", md: "lg" }}
+    >
       <TabList>
-        <Tab _selected={{ color: "white", bg: "blue.500" }}>Tab 1</Tab>
-        <Tab _selected={{ color: "white", bg: "green.400" }}>Tab 2</Tab>
+        <Tab>GIFs</Tab>
+        <Tab>Stickers</Tab>
       </TabList>
-      <TabPanels>
-        <TabPanel>
-          <p>one!</p>
-        </TabPanel>
-        <TabPanel>
-          <p>two!</p>
-        </TabPanel>
-      </TabPanels>
     </Tabs>
   );
 };
