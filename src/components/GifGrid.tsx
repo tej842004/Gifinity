@@ -1,7 +1,8 @@
-import { Box, Image, Spinner, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Spinner, Text } from "@chakra-ui/react";
 import Masonry from "react-masonry-css";
 import type { GifQuery } from "../App";
 import useGif from "../hooks/useGif";
+import { IoIosTrendingUp } from "react-icons/io";
 
 interface Props {
   gifQuery: GifQuery;
@@ -10,7 +11,7 @@ interface Props {
 const GifGrid = ({ gifQuery }: Props) => {
   const { gifs, isLoading, error } = useGif(gifQuery);
 
-  const breakpointColumnsObj = { default: 4, 1100: 3, 768: 2, 0: 1 };
+  const breakpointColumnsObj = { default: 7, 1100: 3, 768: 2, 0: 1 };
 
   if (isLoading)
     return (
@@ -38,19 +39,31 @@ const GifGrid = ({ gifQuery }: Props) => {
     );
 
   return (
-    <Box px={4} py={2}>
+    <Box px={5} py={2}>
+      <Heading
+        mb={2}
+        fontFamily={`'Inter', sans-serif`}
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="flex-start"
+        gap={2}
+      >
+        <IoIosTrendingUp />
+        Trending Now
+      </Heading>
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
         {gifs.map((gif) => (
-          <Box key={gif.id} mb={4} borderRadius="md" overflow="hidden">
+          <Box key={gif.id}>
             <Image
               src={gif.images.fixed_width.url}
               alt={gif.title}
               width="100%"
-              borderRadius="md"
+              objectFit="cover"
             />
           </Box>
         ))}

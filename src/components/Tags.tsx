@@ -2,6 +2,7 @@ import { Box, Button, IconButton, Text } from "@chakra-ui/react";
 import React from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
+import { IoIosTrendingUp } from "react-icons/io";
 import { TfiAngleDoubleLeft, TfiAngleDoubleRight } from "react-icons/tfi";
 import { tags } from "../data/tags";
 
@@ -49,7 +50,17 @@ const Tags = ({ onSelectTag, selectedTag }: Props) => {
             onClick={() => onSelectTag(tag.name)}
             mx={1}
           >
-            <Text fontSize="md">{tag.name}</Text>
+            <Text
+              fontSize="md"
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="center"
+              gap={2}
+            >
+              <IoIosTrendingUp />
+              {tag.name}
+            </Text>
           </Button>
         ))}
       </ScrollMenu>
