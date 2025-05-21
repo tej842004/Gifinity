@@ -43,7 +43,7 @@ const Tags = ({ onSelectTag, selectedTag }: Props) => {
   if (error) return null;
 
   return (
-    <Box width="80vw" mx="auto">
+    <Box width="80vw" mx="auto" marginBottom={3}>
       <ScrollMenu
         LeftArrow={<LeftArrow />}
         RightArrow={<RightArrow />}
