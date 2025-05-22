@@ -1,4 +1,3 @@
-// hooks/useGifTab.ts
 import { useState } from "react";
 
 const useGifTab = () => {

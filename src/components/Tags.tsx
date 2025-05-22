@@ -44,32 +44,34 @@ const Tags = ({ onSelectTag, selectedTag }: Props) => {
 
   return (
     <Box width="80vw" mx="auto" marginBottom={3}>
-      <ScrollMenu
-        LeftArrow={<LeftArrow />}
-        RightArrow={<RightArrow />}
-        wrapperClassName="hide-scrollbar"
-      >
-        {tags.map((tag, index) => (
-          <Button
-            variant={tag === selectedTag ? "solid" : "outline"}
-            key={index}
-            onClick={() => onSelectTag(tag)}
-            mx={1}
-          >
-            <Text
-              fontSize="md"
-              display="flex"
-              flexDirection="row"
-              alignItems="center"
-              justifyContent="center"
-              gap={2}
+      {tags?.data && (
+        <ScrollMenu
+          LeftArrow={<LeftArrow />}
+          RightArrow={<RightArrow />}
+          wrapperClassName="hide-scrollbar"
+        >
+          {tags.data.map((tag, index) => (
+            <Button
+              variant={tag === selectedTag ? "solid" : "outline"}
+              key={index}
+              onClick={() => onSelectTag(tag)}
+              mx={1}
             >
-              <IoIosTrendingUp />
-              {tag}
-            </Text>
-          </Button>
-        ))}
-      </ScrollMenu>
+              <Text
+                fontSize="md"
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="center"
+                gap={2}
+              >
+                <IoIosTrendingUp />
+                {tag}
+              </Text>
+            </Button>
+          ))}
+        </ScrollMenu>
+      )}
     </Box>
   );
 };

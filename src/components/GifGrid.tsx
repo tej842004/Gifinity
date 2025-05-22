@@ -1,4 +1,4 @@
-import { Box, Heading, Image, Show, Spinner, Text } from "@chakra-ui/react";
+import { Box, Heading, Image, Show, Spinner } from "@chakra-ui/react";
 import { IoIosTrendingUp } from "react-icons/io";
 import Masonry from "react-masonry-css";
 import type { GifQuery } from "../App";
@@ -30,18 +30,7 @@ const GifGrid = ({ gifQuery }: Props) => {
       </Box>
     );
 
-  if (error)
-    return (
-      <Text
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        height="20vh"
-        color="tomato"
-      >
-        {error}
-      </Text>
-    );
+  if (error) return null;
 
   return (
     <Box px={5}>
@@ -72,7 +61,7 @@ const GifGrid = ({ gifQuery }: Props) => {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {gifs.map((gif) => (
+        {gifs?.data.map((gif) => (
           <Box key={gif.id}>
             <Image
               src={gif.images.fixed_width.url}
