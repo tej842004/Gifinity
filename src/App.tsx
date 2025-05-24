@@ -1,17 +1,9 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import { useState } from "react";
 import GifGrid from "./components/GifGrid";
 import NavBar from "./components/NavBar";
 import Tags from "./components/Tags";
 
-export interface GifQuery {
-  search: string;
-  tag: string;
-}
-
 const App = () => {
-  const [gifQuery, setGifQuery] = useState<GifQuery>({} as GifQuery);
-
   return (
     <Grid
       templateAreas={{
@@ -24,16 +16,13 @@ const App = () => {
       }}
     >
       <GridItem area="nav">
-        <NavBar onSearch={(search) => setGifQuery({ ...gifQuery, search })} />
+        <NavBar />
       </GridItem>
       <GridItem as="aside">
-        <Tags
-          onSelectTag={(tag) => setGifQuery({ ...gifQuery, tag })}
-          selectedTag={gifQuery.tag}
-        />
+        <Tags />
       </GridItem>
       <GridItem area="main">
-        <GifGrid gifQuery={gifQuery} />
+        <GifGrid />
       </GridItem>
     </Grid>
   );

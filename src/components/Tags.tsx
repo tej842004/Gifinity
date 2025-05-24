@@ -5,11 +5,7 @@ import "react-horizontal-scrolling-menu/dist/styles.css";
 import { IoIosTrendingUp } from "react-icons/io";
 import { TfiAngleDoubleLeft, TfiAngleDoubleRight } from "react-icons/tfi";
 import useSearches from "../hooks/useSearches";
-
-interface Props {
-  onSelectTag: (tag: string) => void;
-  selectedTag: string;
-}
+import useGifQueryStore from "../store";
 
 const LeftArrow = () => {
   const { scrollPrev } = React.useContext(VisibilityContext);
@@ -35,8 +31,12 @@ const RightArrow = () => {
   );
 };
 
-const Tags = ({ onSelectTag, selectedTag }: Props) => {
+const Tags = () => {
   const { data: tags, isLoading, error } = useSearches();
+  const setSelectTag = useGifQueryStore((s) => s.setSelectTag);
+  const gifQuery = useGifQueryStore((s) => s.gifQuery);
+
+  const selectedTag = gifQuery.tag;
 
   if (isLoading) return null;
 
@@ -54,7 +54,7 @@ const Tags = ({ onSelectTag, selectedTag }: Props) => {
             <Button
               variant={tag === selectedTag ? "solid" : "outline"}
               key={index}
-              onClick={() => onSelectTag(tag)}
+              onClick={() => setSelectTag(tag)}
               mx={1}
             >
               <Text

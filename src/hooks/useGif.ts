@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import type { GifQuery } from "../App";
 import apiClient, { type FetchResponse } from "../services/api-client";
+import type { GifQuery } from "../store";
 
 interface Properties {
   fixed_width: {

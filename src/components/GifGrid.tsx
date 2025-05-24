@@ -2,16 +2,13 @@ import { Box, Heading, Image, Show, Spinner, Text } from "@chakra-ui/react";
 import { IoIosTrendingUp } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-css";
-import type { GifQuery } from "../App";
 import useGif from "../hooks/useGif";
 import useGifTab from "../hooks/useGifTab";
+import useGifQueryStore from "../store";
 import AppTabs from "./AppTabs";
 
-interface Props {
-  gifQuery: GifQuery;
-}
-
-const GifGrid = ({ gifQuery }: Props) => {
+const GifGrid = () => {
+  const gifQuery = useGifQueryStore((s) => s.gifQuery);
   const { selectedTab, setSelectedTab, type } = useGifTab();
   const gifType = type === "gifs" || type === "stickers" ? type : undefined;
 
