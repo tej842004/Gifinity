@@ -14,7 +14,7 @@ export interface FetchResponse<T> {
 const apiClient = axios.create({
   baseURL: "https://api.giphy.com/v1/",
   params: {
-    api_key: "qWEnwTx6facTjeAHW4Lj2dsZExYblSNT",
+    api_key: "zbtII7euvvAA3roBvkQdnLFO1U0XlMaM",
   },
 });
 

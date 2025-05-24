@@ -25,30 +25,6 @@ const GifGrid = ({ gifQuery }: Props) => {
 
   const breakpointColumnsObj = { default: 7, 1100: 3, 768: 2, 0: 1 };
 
-  if (isLoading)
-    return (
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        height="50vh"
-      >
-        <Spinner />
-      </Box>
-    );
-
-  if (error)
-    return (
-      <Text
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        height="50vh"
-      >
-        {error.message}
-      </Text>
-    );
-
   const fetchGifCount =
     gifs?.pages.reduce((total, page) => total + page.data.length, 0) || 0;
 
@@ -76,40 +52,64 @@ const GifGrid = ({ gifQuery }: Props) => {
         <AppTabs onTabChange={setSelectedTab} selectedTab={selectedTab} />
       </Box>
 
-      <InfiniteScroll
-        dataLength={fetchGifCount}
-        hasMore={!!hasNextPage}
-        next={() => fetchNextPage()}
-        loader={
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            marginY="5px"
-          >
-            <Spinner />
-          </Box>
-        }
-      >
-        <Masonry
-          breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
+      {isLoading && (
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="50vh"
         >
-          {gifs?.pages.map((page) =>
-            page.data.map((gif) => (
-              <Box key={gif.id}>
-                <Image
-                  src={gif.images.fixed_width.url}
-                  alt={gif.title}
-                  width="100%"
-                  objectFit="cover"
-                />
-              </Box>
-            ))
-          )}
-        </Masonry>
-      </InfiniteScroll>
+          <Spinner />
+        </Box>
+      )}
+
+      {error && (
+        <Text
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="50vh"
+        >
+          {error.message}
+        </Text>
+      )}
+
+      {!isLoading && !error && gifs && (
+        <InfiniteScroll
+          dataLength={fetchGifCount}
+          hasMore={!!hasNextPage}
+          next={() => fetchNextPage()}
+          loader={
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              marginY="5px"
+            >
+              <Spinner />
+            </Box>
+          }
+        >
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {gifs.pages.map((page) =>
+              page.data.map((gif) => (
+                <Box key={gif.id}>
+                  <Image
+                    src={gif.images.fixed_width.url}
+                    alt={gif.title}
+                    width="100%"
+                    objectFit="cover"
+                  />
+                </Box>
+              ))
+            )}
+          </Masonry>
+        </InfiniteScroll>
+      )}
     </Box>
   );
 };
