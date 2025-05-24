@@ -12,7 +12,8 @@ const ToggleButton = () => {
       variant="ghost"
       borderRadius="full"
       onClick={toggleColorMode}
-      size="lg"
+      boxSize={{ base: "50px", md: "40px" }}
+      fontSize={{ base: "25px", md: "20px" }}
     />
   );
 };

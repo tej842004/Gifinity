@@ -1,14 +1,36 @@
-import { Heading, HStack } from "@chakra-ui/react";
+import {
+  Heading,
+  HStack,
+  VStack,
+  Box,
+  Spacer,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import SearchInput from "./SearchInput";
 import ToggleButton from "./ToggleButton";
 
 const NavBar = () => {
+  const isMobile = useBreakpointValue({ base: true, md: false });
+
   return (
-    <HStack padding="10px" gap={5}>
-      <Heading size="lg">Gifinity</Heading>
-      <SearchInput />
-      <ToggleButton />
-    </HStack>
+    <Box padding="10px">
+      {isMobile ? (
+        <VStack align="stretch" gap={3}>
+          <HStack justify="space-between">
+            <Heading fontSize="4xl">Gifinity</Heading>
+            <ToggleButton />
+          </HStack>
+          <SearchInput />
+        </VStack>
+      ) : (
+        <HStack gap={5} align="center">
+          <Heading fontSize="3xl">Gifinity</Heading>
+          <SearchInput />
+          <Spacer />
+          <ToggleButton />
+        </HStack>
+      )}
+    </Box>
   );
 };
 

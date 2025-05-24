@@ -18,7 +18,7 @@ const SearchInput = () => {
         <InputLeftElement children={<CiSearch />} />
         <Input
           ref={ref}
-          placeholder="Search..."
+          placeholder="Search all the GIFs and Stickers"
           borderRadius={20}
           variant="filled"
         />
