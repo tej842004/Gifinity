@@ -3,7 +3,7 @@ import useGifQueryStore from "../store";
 
 const AppTabs = () => {
   const setSelectedTab = useGifQueryStore((s) => s.setSelectedTab);
-  const selectedTab = useGifQueryStore((s) => s.tabQuery.selectedTab ?? 0);
+  const selectedTab = useGifQueryStore((s) => s.tabQuery.selectedTab);
 
   return (
     <Tabs

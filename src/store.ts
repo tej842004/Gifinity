@@ -22,7 +22,7 @@ const useGifQueryStore = create<GifQueryStore>((set) => ({
   setSearchText: (search) => set(() => ({ gifQuery: { search } })),
   setSelectTag: (tag) =>
     set((store) => ({ gifQuery: { ...store.gifQuery, tag } })),
-  tabQuery: {},
+  tabQuery: { selectedTab: 0 },
   setSelectedTab: (index) => set(() => ({ tabQuery: { selectedTab: index } })),
 }));
 
