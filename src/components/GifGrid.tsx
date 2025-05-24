@@ -3,14 +3,11 @@ import { IoIosTrendingUp } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-css";
 import useGif from "../hooks/useGif";
-import useGifTab from "../hooks/useGifTab";
 import useGifQueryStore from "../store";
 import AppTabs from "./AppTabs";
 
 const GifGrid = () => {
   const gifQuery = useGifQueryStore((s) => s.gifQuery);
-  const { selectedTab, setSelectedTab, type } = useGifTab();
-  const gifType = type === "gifs" || type === "stickers" ? type : undefined;
 
   const {
     data: gifs,
@@ -18,7 +15,7 @@ const GifGrid = () => {
     isLoading,
     fetchNextPage,
     hasNextPage,
-  } = useGif(gifQuery, gifType);
+  } = useGif(gifQuery);
 
   const breakpointColumnsObj = { default: 7, 1100: 3, 768: 2, 0: 1 };
 
@@ -46,7 +43,7 @@ const GifGrid = () => {
             Trending Now
           </Heading>
         </Show>
-        <AppTabs onTabChange={setSelectedTab} selectedTab={selectedTab} />
+        <AppTabs />
       </Box>
 
       {isLoading && (

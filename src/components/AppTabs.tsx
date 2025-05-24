@@ -1,15 +1,14 @@
 import { Tab, TabList, Tabs } from "@chakra-ui/react";
+import useGifQueryStore from "../store";
 
-interface Props {
-  selectedTab: number;
-  onTabChange: (index: number) => void;
-}
+const AppTabs = () => {
+  const setSelectedTab = useGifQueryStore((s) => s.setSelectedTab);
+  const selectedTab = useGifQueryStore((s) => s.tabQuery.selectedTab ?? 0);
 
-const AppTabs = ({ selectedTab, onTabChange }: Props) => {
   return (
     <Tabs
       index={selectedTab}
-      onChange={onTabChange}
+      onChange={setSelectedTab}
       variant="soft-rounded"
       size={{ base: "md", md: "lg" }}
     >

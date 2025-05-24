@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import apiClient, { type FetchResponse } from "../services/api-client";
 import type { GifQuery } from "../store";
+import useGifQueryStore from "../store";
 
 interface Properties {
   fixed_width: {
@@ -16,7 +17,13 @@ export interface Gif {
   images: Properties;
 }
 
-const useGif = (gifQuery: GifQuery, type: "gifs" | "stickers" = "gifs") => {
+type GifType = "gifs" | "stickers" | undefined;
+
+const useGif = (gifQuery: GifQuery) => {
+  const selectedTab = useGifQueryStore((s) => s.tabQuery.selectedTab);
+  const type: GifType =
+    selectedTab === 0 ? "gifs" : selectedTab === 1 ? "stickers" : undefined;
+
   const endpoint =
     gifQuery.search || gifQuery.tag ? `/${type}/search` : `/${type}/trending`;
 
