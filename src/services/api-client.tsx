@@ -1,7 +1,14 @@
 import axios from "axios";
 
+interface Pagination {
+  total_count: number;
+  count: number;
+  offset: 0;
+}
+
 export interface FetchResponse<T> {
   data: T[];
+  pagination: Pagination;
 }
 
 const apiClient = axios.create({

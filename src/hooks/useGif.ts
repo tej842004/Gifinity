@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import type { GifQuery } from "../App";
 import apiClient, { type FetchResponse } from "../services/api-client";
 
@@ -20,17 +20,28 @@ const useGif = (gifQuery: GifQuery, type: "gifs" | "stickers" = "gifs") => {
   const endpoint =
     gifQuery.search || gifQuery.tag ? `/${type}/search` : `/${type}/trending`;
 
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["gifs", gifQuery, "type", type],
-    queryFn: () =>
+    queryFn: ({ pageParam = 0 }) =>
       apiClient
         .get<FetchResponse<Gif>>(endpoint, {
           params: {
             q: gifQuery.search || gifQuery.tag,
+            offset: pageParam,
           },
         })
-        .then((res) => res.data),
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        }),
     staleTime: 24 * 60 * 60 * 1000, //24h
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const { pagination } = lastPage;
+      const nextoffset = pagination.offset + pagination.count;
+
+      return nextoffset < pagination.total_count ? nextoffset : undefined;
+    },
   });
 };
 

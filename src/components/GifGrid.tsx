@@ -1,5 +1,6 @@
-import { Box, Heading, Image, Show, Spinner } from "@chakra-ui/react";
+import { Box, Heading, Image, Show, Spinner, Text } from "@chakra-ui/react";
 import { IoIosTrendingUp } from "react-icons/io";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-css";
 import type { GifQuery } from "../App";
 import useGif from "../hooks/useGif";
@@ -14,7 +15,13 @@ const GifGrid = ({ gifQuery }: Props) => {
   const { selectedTab, setSelectedTab, type } = useGifTab();
   const gifType = type === "gifs" || type === "stickers" ? type : undefined;
 
-  const { data: gifs, isLoading, error } = useGif(gifQuery, gifType);
+  const {
+    data: gifs,
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+  } = useGif(gifQuery, gifType);
 
   const breakpointColumnsObj = { default: 7, 1100: 3, 768: 2, 0: 1 };
 
@@ -30,7 +37,20 @@ const GifGrid = ({ gifQuery }: Props) => {
       </Box>
     );
 
-  if (error) return null;
+  if (error)
+    return (
+      <Text
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="50vh"
+      >
+        {error.message}
+      </Text>
+    );
+
+  const fetchGifCount =
+    gifs?.pages.reduce((total, page) => total + page.data.length, 0) || 0;
 
   return (
     <Box px={5}>
@@ -56,22 +76,40 @@ const GifGrid = ({ gifQuery }: Props) => {
         <AppTabs onTabChange={setSelectedTab} selectedTab={selectedTab} />
       </Box>
 
-      <Masonry
-        breakpointCols={breakpointColumnsObj}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {gifs?.data.map((gif) => (
-          <Box key={gif.id}>
-            <Image
-              src={gif.images.fixed_width.url}
-              alt={gif.title}
-              width="100%"
-              objectFit="cover"
-            />
+      <InfiniteScroll
+        dataLength={fetchGifCount}
+        hasMore={!!hasNextPage}
+        next={() => fetchNextPage()}
+        loader={
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            marginY="5px"
+          >
+            <Spinner />
           </Box>
-        ))}
-      </Masonry>
+        }
+      >
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {gifs?.pages.map((page) =>
+            page.data.map((gif) => (
+              <Box key={gif.id}>
+                <Image
+                  src={gif.images.fixed_width.url}
+                  alt={gif.title}
+                  width="100%"
+                  objectFit="cover"
+                />
+              </Box>
+            ))
+          )}
+        </Masonry>
+      </InfiniteScroll>
     </Box>
   );
 };
