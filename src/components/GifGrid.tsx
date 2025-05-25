@@ -101,6 +101,7 @@ const GifGrid = () => {
                         alt={gif.title}
                         width="100%"
                         objectFit="cover"
+                        marginBottom={4}
                       />
                     </Link>
                   </Box>

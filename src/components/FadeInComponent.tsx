@@ -13,7 +13,6 @@ const FadeInComponent = ({ children }: { children: ReactNode }) => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       style={{
         fontSize: "1.5rem",
-        margin: "1rem 0",
         maxWidth: "100vw",
         lineHeight: 1.6,
       }}
