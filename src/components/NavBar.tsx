@@ -18,7 +18,7 @@ const NavBar = () => {
       {isMobile ? (
         <VStack align="stretch" gap={3}>
           <HStack justify="space-between">
-            <Heading fontSize="4xl">Gifinity</Heading>
+            <Heading fontSize="4xl" mx={3}>Gifinity</Heading>
             <ToggleButton />
           </HStack>
           <SearchInput />
