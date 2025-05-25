@@ -2,7 +2,8 @@ import { Box, Heading, Image, Show, Spinner, Text } from "@chakra-ui/react";
 import { IoIosTrendingUp } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-css";
-import useGif from "../hooks/useGif";
+import { Link } from "react-router";
+import useGifs from "../hooks/useGifs";
 import useGifQueryStore from "../store";
 import AppTabs from "./AppTabs";
 
@@ -15,7 +16,7 @@ const GifGrid = () => {
     isLoading,
     fetchNextPage,
     hasNextPage,
-  } = useGif(gifQuery);
+  } = useGifs(gifQuery);
 
   const breakpointColumnsObj = { default: 7, 1100: 3, 768: 2, 0: 1 };
 
@@ -92,12 +93,14 @@ const GifGrid = () => {
             {gifs.pages.map((page) =>
               page.data.map((gif) => (
                 <Box key={gif.id}>
-                  <Image
-                    src={gif.images.fixed_width.url}
-                    alt={gif.title}
-                    width="100%"
-                    objectFit="cover"
-                  />
+                  <Link to={`/gif/${gif.id}`}>
+                    <Image
+                      src={gif.images.fixed_width.url}
+                      alt={gif.title}
+                      width="100%"
+                      objectFit="cover"
+                    />
+                  </Link>
                 </Box>
               ))
             )}

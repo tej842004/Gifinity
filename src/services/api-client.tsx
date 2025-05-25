@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
 
 interface Pagination {
   total_count: number;
@@ -11,11 +11,32 @@ export interface FetchResponse<T> {
   pagination: Pagination;
 }
 
-const apiClient = axios.create({
+const axiosInstance = axios.create({
   baseURL: "https://api.giphy.com/v1/",
   params: {
     api_key: "zbtII7euvvAA3roBvkQdnLFO1U0XlMaM",
   },
 });
 
-export default apiClient;
+class APIClient<T> {
+  endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = endpoint;
+  }
+
+  getAll = async (conifg: AxiosRequestConfig) => {
+    const res = await axiosInstance.get<FetchResponse<T>>(
+      this.endpoint,
+      conifg
+    );
+    return res.data;
+  };
+
+  get = async (conifg: AxiosRequestConfig) => {
+    const res = await axiosInstance.get<FetchResponse<T>>(this.endpoint, conifg);
+    return res.data;
+  };
+}
+
+export default APIClient;

@@ -1,14 +1,10 @@
 import { Outlet } from "react-router";
 import NavBar from "../src/components/NavBar";
 
-interface Props {
-  onSearch: (searchText: string) => void;
-}
-
-const Layout = ({ onSearch }: Props) => {
+const Layout = () => {
   return (
     <>
-      <NavBar onSearch={onSearch} />
+      <NavBar />
       <Outlet />
     </>
   );
