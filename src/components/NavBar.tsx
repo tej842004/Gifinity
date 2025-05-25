@@ -1,11 +1,12 @@
 import {
+  Box,
   Heading,
   HStack,
-  VStack,
-  Box,
   Spacer,
   useBreakpointValue,
+  VStack,
 } from "@chakra-ui/react";
+import { Link } from "react-router";
 import SearchInput from "./SearchInput";
 import ToggleButton from "./ToggleButton";
 
@@ -24,7 +25,9 @@ const NavBar = () => {
         </VStack>
       ) : (
         <HStack gap={5} align="center">
-          <Heading fontSize="3xl">Gifinity</Heading>
+          <Heading fontSize="3xl">
+            <Link to="/">Gifinity</Link>
+          </Heading>
           <SearchInput />
           <Spacer />
           <ToggleButton />

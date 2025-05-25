@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import useGifs from "../hooks/useGifs";
 import useGifQueryStore from "../store";
 import AppTabs from "./AppTabs";
+import FadeInComponent from "./FadeInComponent";
 
 const GifGrid = () => {
   const gifQuery = useGifQueryStore((s) => s.gifQuery);
@@ -92,16 +93,18 @@ const GifGrid = () => {
           >
             {gifs.pages.map((page) =>
               page.data.map((gif) => (
-                <Box key={gif.id}>
-                  <Link to={`/gif/${gif.id}`}>
-                    <Image
-                      src={gif.images.fixed_width.url}
-                      alt={gif.title}
-                      width="100%"
-                      objectFit="cover"
-                    />
-                  </Link>
-                </Box>
+                <FadeInComponent>
+                  <Box key={gif.id}>
+                    <Link to={`/gif/${gif.id}`}>
+                      <Image
+                        src={gif.images.fixed_width.url}
+                        alt={gif.title}
+                        width="100%"
+                        objectFit="cover"
+                      />
+                    </Link>
+                  </Box>
+                </FadeInComponent>
               ))
             )}
           </Masonry>

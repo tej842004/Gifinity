@@ -14,6 +14,11 @@ interface Properties {
     height: string;
     width: string;
   };
+  downsized: {
+    url: string;
+    height: string;
+    width: string;
+  };
 }
 
 export interface Gif {

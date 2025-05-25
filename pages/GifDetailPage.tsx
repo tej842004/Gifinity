@@ -1,8 +1,8 @@
+import { Box } from "@chakra-ui/react";
 import { useParams } from "react-router";
+import GifDisplay from "../src/components/GifDisplay";
 import useGif from "../src/hooks/useGif";
 import { downloadGif } from "../src/utils/downloadGif";
-import GifDisplay from "../src/components/GifDisplay";
-import { Box } from "@chakra-ui/react";
 
 const GifDetailPage = () => {
   const { id } = useParams();
