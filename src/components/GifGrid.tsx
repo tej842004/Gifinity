@@ -1,12 +1,12 @@
-import { Box, Heading, Image, Show, Spinner, Text } from "@chakra-ui/react";
+import { Box, Heading, Show, Spinner, Text } from "@chakra-ui/react";
 import { IoIosTrendingUp } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry from "react-masonry-css";
-import { Link } from "react-router";
 import useGifs from "../hooks/useGifs";
 import useGifQueryStore from "../store";
 import AppTabs from "./AppTabs";
 import FadeInComponent from "./FadeInComponent";
+import GifCard from "./GifCard";
 
 const GifGrid = () => {
   const gifQuery = useGifQueryStore((s) => s.gifQuery);
@@ -93,18 +93,8 @@ const GifGrid = () => {
           >
             {gifs.pages.map((page) =>
               page.data.map((gif) => (
-                <FadeInComponent>
-                  <Box key={gif.id}>
-                    <Link to={`/gif/${gif.id}`}>
-                      <Image
-                        src={gif.images.fixed_width.url}
-                        alt={gif.title}
-                        width="100%"
-                        objectFit="cover"
-                        marginBottom={4}
-                      />
-                    </Link>
-                  </Box>
+                <FadeInComponent key={gif.id}>
+                  <GifCard gif={gif} />
                 </FadeInComponent>
               ))
             )}
