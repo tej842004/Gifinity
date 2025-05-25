@@ -18,7 +18,7 @@ const GifDetailPage = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      height="100vh"
+      height="50vh"
     >
       <GifDisplay
         imageUrl={gifData.images.fixed_width.url}
