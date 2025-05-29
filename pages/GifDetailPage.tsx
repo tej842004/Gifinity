@@ -8,8 +8,8 @@ const GifDetailPage = () => {
   const { id } = useParams();
   const { data } = useGif(id!);
 
-  const gifTitle = data?.data[0].slug;
-  const searchTerm = gifTitle?.split(" ").slice(0, 3).join(" ");
+  // const gifTitle = data?.data[0].slug;
+  // const searchTerm = gifTitle?.split(" ").slice(0, 3).join(" ");
 
   if (!data) return null;
 
